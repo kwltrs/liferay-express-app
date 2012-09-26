@@ -71,4 +71,21 @@ portal.sendImage = function (path) {
     };
 };
 
+portal.sendBlogImage = function () {
+    return function (req, res) {
+        var path = '/image/blogs/article?img_id=' + req.params.imgId;
+        var options = {
+            host: hostConfig.host,
+            port: hostConfig.port,
+            path: path
+        };
+
+        http.get(options, function (clientRes) {
+            res.status(clientRes.statusCode);
+            res.type(clientRes.headers['content-type']);
+            clientRes.pipe(res);
+        });
+    };
+};
+
 module.exports = portal;
