@@ -1,8 +1,10 @@
-var liferay = require('liferay-jsonws');
+var liferay = require('liferay-jsonws'),
+    helpers = require('./helpers');
 
 var hostConfig = require('./hostConfig');
 var config = {
-    groupId: 10431
+    groupId: 10431,
+    siteSetupTitle: 'site-setup'
 };
 
 var services = liferay.createServices( hostConfig );
@@ -22,6 +24,33 @@ portal.loadBlogEntries = function () {
             next();
         });
     };
+};
+
+portal.loadBlogEntryByUrlTitle = function () {
+    return function (req, res, next) {
+        var options = {
+            groupId: config.groupId,
+            urlTitle: req.params.urlTitle
+        };
+
+        services.blogsEntry.getEntry(options, function (entry) {
+            res.locals.entry = entry;
+            next();
+        });
+    };
+};
+
+portal.loadSiteSetup = function (callback) {
+    var options = {
+        groupId: config.groupId,
+        urlTitle: config.siteSetupTitle
+    };
+
+    services.journalArticle.getArticleByUrlTitle(options, function (article) {
+        var siteSetup = helpers.dynamicContentToObj(article.content);
+        callback(siteSetup);
+        return siteSetup;
+    });
 };
 
 module.exports = portal;

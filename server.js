@@ -47,17 +47,23 @@ app.configure(function () {
 
 /** routing */
 
-app.get('/',
-    portal.loadBlogEntries(),
-    renderTemplate('index')
-);
+portal.loadSiteSetup(function (siteSetup) {
+    app.get('*', function (req, res, next) {
+        res.locals.siteSetup = siteSetup;
+        next();
+    });
 
-app.get('/dogs/:urlTitle',
-    renderTemplate('blog-entry')
-);
+    app.get('/',
+        portal.loadBlogEntries(),
+        renderTemplate('index')
+    );
 
+    app.get('/dogs/:urlTitle',
+        portal.loadBlogEntryByUrlTitle(),
+        renderTemplate('blog-entry')
+    );
 
-
-http.createServer(app).listen(app.get('port'), function () {
-    console.log("Express server listening on port " + app.get('port'));
+    http.createServer(app).listen(app.get('port'), function () {
+        console.log("Express server listening on port " + app.get('port'));
+    });
 });

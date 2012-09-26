@@ -4,12 +4,12 @@ block content
   img.entry-image(src='/dog-image.png', alt='dog pic')
 
   div.entry-content
-    h1 {{title}}
-    {{content}}
+    h1= entry.title
+    !{entry.content}
 
   div.entry-meta
-    | Published by {{author}}
-    | on {{date}}.
+    | Published by #{entry.statusByUserName}
+    | on #{new Date(entry.statusDate).toDateString()}.
 
   div.read-more
     a(href='/') Return to the Acandog Archive
