@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  img.entry-image(src='/dog-image.png', alt='dog pic')
+
+  div.entry-content
+    h1 {{title}}
+    {{content}}
+
+  div.entry-meta
+    | Published by {{author}}
+    | on {{date}}.
+
+  div.read-more
+    a(href='/') Return to the Acandog Archive

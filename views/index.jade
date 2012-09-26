@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div#banner(style='background-image:url(/banner.png)')
+    h1.headline Acandog
+    div.teaser  {{teaser}}
+
+  ul.promoted.dogs
+    each entry in ['Alice', 'Bob', 'Malory']
+      li
+        a(href='/dogs/xxx')
+          img(src='/dog-image-326x360.png', alt='dog pic')
+          span.name= entry
+
+  ul.dogs
+    each entry in ['Charly', 'Dave', 'Erna', 'Fred']
+      li
+        a(href='/dogs/xxx')
+          img(src='/dog-image-240x240.png', alt='dog pic')
+          span.name= entry
+
