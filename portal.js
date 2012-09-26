@@ -1,4 +1,5 @@
 var liferay = require('liferay-jsonws'),
+    http = require('http'),
     helpers = require('./helpers');
 
 var hostConfig = require('./hostConfig');
@@ -51,6 +52,23 @@ portal.loadSiteSetup = function (callback) {
         callback(siteSetup);
         return siteSetup;
     });
+};
+
+
+portal.sendImage = function (path) {
+    var options = {
+        host: hostConfig.host,
+        port: hostConfig.port,
+        path: path
+    };
+
+    return function (req, res) {
+        http.get(options, function (clientRes) {
+            res.status(clientRes.statusCode);
+            res.type(clientRes.headers['content-type']);
+            clientRes.pipe(res);
+        });
+    };
 };
 
 module.exports = portal;

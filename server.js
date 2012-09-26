@@ -63,6 +63,10 @@ portal.loadSiteSetup(function (siteSetup) {
         renderTemplate('blog-entry')
     );
 
+    app.get('/site-banner',
+        portal.sendImage(siteSetup.banner)
+    );
+
     http.createServer(app).listen(app.get('port'), function () {
         console.log("Express server listening on port " + app.get('port'));
     });
