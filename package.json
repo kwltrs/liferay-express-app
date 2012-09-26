@@ -1,0 +1,8 @@
+{
+    "name": "liferay-express-demo",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "liferay-jsonws": "git://github.com/kwltrs/liferay-jsonws.git#master"
+    }
+}
