@@ -1,5 +1,6 @@
 var xpath = require('xpath'),
-    dom = require('xmldom').DOMParser;
+    dom = require('xmldom').DOMParser,
+    spawn = require('child_process').spawn;
 
 module.exports.dynamicContentToObj = function (xml) {
     var doc = new dom().parseFromString(xml);
@@ -12,4 +13,13 @@ module.exports.dynamicContentToObj = function (xml) {
         store[name] = content;
         return store;
     }, {});
+};
+
+module.exports.imageResizeStream = function (size) {
+    var args = [
+            '-resize', size + '^',
+            '-gravity', 'Center',
+            '-extent', size,
+            '-', '-'];
+    return spawn('convert', args);
 };

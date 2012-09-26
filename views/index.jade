@@ -9,13 +9,13 @@ block content
     each entry in entries.slice(0,3)
       li
         a(href='/dogs/' + entry.urlTitle)
-          img(src='/dog-image-326x360.png', alt='dog pic')
+          img(src='/dog-image/large/' + entry.smallImageId, alt='dog pic')
           span.name= entry.title
 
   ul.dogs
     each entry in entries.slice(3)
       li
         a(href='/dogs/' + entry.urlTitle)
-          img(src='/dog-image-240x240.png', alt='dog pic')
+          img(src='/dog-image/small/' + entry.smallImageId, alt='dog pic')
           span.name= entry.title
 

@@ -88,4 +88,26 @@ portal.sendBlogImage = function () {
     };
 };
 
+portal.sendResizedBlogImage = function () {
+    return function (req, res) {
+        var path = '/image/blogs/article?img_id=' + req.params.imgId;
+        var options = {
+            host: hostConfig.host,
+            port: hostConfig.port,
+            path: path
+        };
+
+        var size = (req.params.size == 'small') ? '240x240' : '326x360';
+
+        http.get(options, function (clientRes) {
+            res.status(clientRes.statusCode);
+            res.type(clientRes.headers['content-type']);
+
+            var convert = helpers.imageResizeStream(size);
+            clientRes.pipe(convert.stdin);
+            convert.stdout.pipe(res);
+        });
+    };
+};
+
 module.exports = portal;
