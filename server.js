@@ -3,7 +3,8 @@
  */
 var express = require('express'),
     http = require('http'),
-    path = require('path');
+    path = require('path'),
+    portal = require('./portal');
 
 
 /** middleware helpers */
@@ -47,6 +48,7 @@ app.configure(function () {
 /** routing */
 
 app.get('/',
+    portal.loadBlogEntries(),
     renderTemplate('index')
 );
 

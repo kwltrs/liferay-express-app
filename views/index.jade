@@ -6,16 +6,16 @@ block content
     div.teaser  {{teaser}}
 
   ul.promoted.dogs
-    each entry in ['Alice', 'Bob', 'Malory']
+    each entry in entries.slice(0,3)
       li
         a(href='/dogs/xxx')
           img(src='/dog-image-326x360.png', alt='dog pic')
-          span.name= entry
+          span.name= entry.title
 
   ul.dogs
-    each entry in ['Charly', 'Dave', 'Erna', 'Fred']
+    each entry in entries.slice(3)
       li
         a(href='/dogs/xxx')
           img(src='/dog-image-240x240.png', alt='dog pic')
-          span.name= entry
+          span.name= entry.title
 
