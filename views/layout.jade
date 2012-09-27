@@ -11,6 +11,9 @@ html
 
     nav
       ul.nav-items
+        each navItem in navItems
+          li
+            a(href=navItem.href)= navItem.text
         li.current
           a(href='/') Acandog
 

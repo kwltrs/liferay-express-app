@@ -4,6 +4,7 @@
 var express = require('express'),
     http = require('http'),
     path = require('path'),
+    site = require('./site'),
     portal = require('./portal');
 
 
@@ -48,7 +49,7 @@ app.configure(function () {
 /** routing */
 
 portal.loadSiteSetup(function (siteSetup) {
-    app.get('*', function (req, res, next) {
+    app.get('*', site.loadNavItems(), function (req, res, next) {
         res.locals.siteSetup = siteSetup;
         next();
     });
